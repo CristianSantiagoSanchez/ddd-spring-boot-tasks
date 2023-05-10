@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mariadb://db:3306/book_swap
+    username: root
+    password: plexus
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
