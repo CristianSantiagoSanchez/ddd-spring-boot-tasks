@@ -1,11 +1,9 @@
-package es.plexus.entity.task;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+package es.plexus.jpa.task;
 
 
+import es.plexus.entity.task.StatusTask;
+import es.plexus.jpa.user.UserJPA;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 @Entity
-public class Task {
+public class TaskJPA {
 
     @Id
     @GeneratedValue

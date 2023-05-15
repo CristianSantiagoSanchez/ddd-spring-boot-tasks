@@ -1,7 +1,7 @@
 package es.plexus.controller.user;
 
 import es.plexus.entity.user.User;
-import es.plexus.usecase.user.UserService;
+import es.plexus.usecase.user.DeleteUserByIdUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserDeleteController {
 
     @Autowired
-    private UserService userService;
+    private DeleteUserByIdUseCase deleteUserByIdUseCase;
 
     @DeleteMapping(path = "/users/{id}")
     public ResponseEntity<User> deleteUserById(@PathVariable int id) {
-        userService.deleteUserById(id);
+        deleteUserByIdUseCase.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
 }

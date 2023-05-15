@@ -1,0 +1,15 @@
+version: '3.9'
+volumes:
+  data:
+services:
+  database:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: plexus
+      MYSQL_DATABASE: tasks
+      MYSQL_USER: plexus
+      MYSQL_PASSWORD: plexus
+    volumes:
+      - data:/var/lib/mysql
+    ports:
+      - "3306:3306"

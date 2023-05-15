@@ -25,7 +25,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
         jwtAuthenticationFilter.setAuthenticationManager(authManager);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/api/login");
+        jwtAuthenticationFilter.setFilterProcessesUrl("/app-task/1/login");
 
         return http
                 .cors().and()
@@ -33,7 +33,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests( auth -> auth
                         .requestMatchers("/swagger-ui/**","/v3/api-docs/**")
                         .permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/register")
+                        .requestMatchers(HttpMethod.POST, "/app-task/1/register")
                         .permitAll()
                         .anyRequest()
                         .authenticated())

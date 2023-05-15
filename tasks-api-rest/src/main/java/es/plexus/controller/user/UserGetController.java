@@ -1,7 +1,7 @@
 package es.plexus.controller.user;
 
 import es.plexus.entity.user.User;
-import es.plexus.usecase.user.UserService;
+import es.plexus.usecase.user.FindUserByIdUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +16,14 @@ import java.util.Optional;
 @RequestMapping("/app-task/1")
 public class UserGetController {
     @Autowired
-    private UserService userService;
+    private FindUserByIdUseCase findUserByIdUseCase;
 
 
      @GetMapping(path = "/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) {
 
-        Optional<User> user = userService.getUserById(id);
+        User user = findUserByIdUseCase.getUserById(id);
 
-        return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

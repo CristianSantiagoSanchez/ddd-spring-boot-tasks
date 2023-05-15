@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mariadb://db:3306/book_swap
+    url: jdbc:mariadb://localhost:3306/tasks
     username: root
     password: plexus
     driver-class-name: org.mariadb.jdbc.Driver
