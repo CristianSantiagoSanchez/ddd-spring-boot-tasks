@@ -1,7 +1,7 @@
 package es.plexus.controller.user;
 
 import es.plexus.entity.user.User;
-import es.plexus.usecase.user.UserService;
+import es.plexus.usecase.user.UpdateUserByIdUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/app-task/1")
-public class UserUpdateController {
+public class UserPutController {
     @Autowired
-    private UserService userService;
+    private UpdateUserByIdUseCase userService;
 
     @PutMapping(path = "/users/{id}")
     public ResponseEntity<User> updateUserById(@PathVariable int id, @Valid @RequestBody User user){

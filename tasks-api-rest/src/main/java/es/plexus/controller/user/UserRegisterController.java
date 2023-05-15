@@ -1,7 +1,7 @@
 package es.plexus.controller.user;
 
 import es.plexus.entity.user.User;
-import es.plexus.usecase.user.UserService;
+import es.plexus.usecase.user.CreateUserUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +18,11 @@ import java.net.URI;
 public class UserRegisterController {
 
     @Autowired
-    private UserService userService;
+    private CreateUserUseCase createUserUseCase;
 
-    @PostMapping(path = "/users")
+    @PostMapping(path = "/register")
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
-        User createdUser = userService.createUser(user);
+        User createdUser = createUserUseCase.createUser(user);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(createdUser.getId())

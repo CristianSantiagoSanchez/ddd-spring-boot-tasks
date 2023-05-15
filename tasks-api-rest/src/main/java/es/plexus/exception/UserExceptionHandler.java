@@ -3,6 +3,7 @@ package es.plexus.exception;
 
 import es.plexus.exceptions.user.EmailUsedException;
 import es.plexus.exceptions.user.UserNotFoundException;
+import es.plexus.exceptions.user.UsernameUsedException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -21,7 +22,7 @@ public class UserExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(EmailUsedException.class)
+    @ExceptionHandler({EmailUsedException.class, UsernameUsedException.class})
     public final ResponseEntity handleEmailRepeatedException(Exception ex, WebRequest request) throws Exception {
         return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }

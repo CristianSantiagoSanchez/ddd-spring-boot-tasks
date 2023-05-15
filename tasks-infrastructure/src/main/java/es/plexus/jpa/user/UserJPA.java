@@ -1,16 +1,15 @@
-package es.plexus.entity.user;
+package es.plexus.jpa.user;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
 @Entity(name = "user_details")
-public class User {
+public class UserJPA {
     @Id
     @GeneratedValue
     private int id;
@@ -20,5 +19,7 @@ public class User {
     private String email;
 
     private String password;
+
+    private String username;
 
 }

@@ -1,7 +1,7 @@
 package es.plexus.controller.user;
 
 import es.plexus.entity.user.User;
-import es.plexus.usecase.user.UserService;
+import es.plexus.usecase.user.FindAllUsersUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +16,10 @@ import java.util.List;
 public class UserGetAllController {
 
     @Autowired
-    private UserService userService;
+    private FindAllUsersUseCase findAllUsersUseCase;
 
     @GetMapping(path = "/users")
     public ResponseEntity<List<User>> getUsers() {
-        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+        return new ResponseEntity<>(findAllUsersUseCase.getUsers(), HttpStatus.OK);
     }
 }

@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import es.plexus.entity.user.User;
-import es.plexus.usecase.user.UserService;
+import es.plexus.usecase.user.FindUserByIdUseCase;
+import es.plexus.usecase.user.UpdateUserByIdUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +18,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserPatchController {
 
     @Autowired
-    private UserService userService;
+    private UpdateUserByIdUseCase userService;
+
+    @Autowired
+    private FindUserByIdUseCase findUserByIdUseCase;
 
 
     @PatchMapping(path = "/users/{id}", consumes = "application/json-patch+json")
     public ResponseEntity<User> updateUserByIdPartial(@PathVariable int id, @RequestBody JsonPatch patch){
 
-        User user = userService.getUserById(id).get();
+        User user = findUserByIdUseCase.getUserById(id);
         User userPatched = null;
         try {
             userPatched = applyPatchToUser(patch, user);
