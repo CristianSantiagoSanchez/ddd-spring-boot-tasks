@@ -2,8 +2,7 @@ package es.plexus.controller.task;
 
 import es.plexus.entity.task.Task;
 import es.plexus.entity.user.User;
-import es.plexus.usecase.task.TaskService;
-import es.plexus.usecase.user.UpdateUserByIdUseCase;
+import es.plexus.usecase.task.CreateTaskUseCase;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,29 +10,25 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/app-task")
+@RequestMapping("/app-task/1")
 public class TaskPostController {
 
     @Autowired
-    private UpdateUserByIdUseCase userService;
+    private CreateTaskUseCase createTaskUseCase;
 
-    @Autowired
-    private TaskService taskService;
 
-    /*@PostMapping(path = "/users/{id}/tasks")
-    public ResponseEntity<User> createTaskForUser(@PathVariable int id, @Valid @RequestBody Task task) {
-        Optional<User> user = userService.getUserById(id);
+    @PostMapping(path = "/users/{userId}/tasks")
+    public ResponseEntity<User> createTaskForUser(@PathVariable int userId, @Valid @RequestBody Task task) {
 
-        Task createdTask = taskService.createTask(user.get(), task);
+        Task createdTask = createTaskUseCase.createTask(userId, task);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
+                .path("/{taskId}")
                 .buildAndExpand(createdTask.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
 
-    }*/
+    }
 }

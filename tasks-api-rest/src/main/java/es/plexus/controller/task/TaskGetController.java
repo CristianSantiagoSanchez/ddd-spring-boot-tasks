@@ -1,33 +1,25 @@
 package es.plexus.controller.task;
 
-import es.plexus.entity.user.User;
-import es.plexus.usecase.task.TaskService;
-import es.plexus.usecase.user.UpdateUserByIdUseCase;
+import es.plexus.usecase.task.FindTaskForUserByIdUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/app-task")
+@RequestMapping("/app-task/1")
 public class TaskGetController {
 
     @Autowired
-    private UpdateUserByIdUseCase userService;
+    private FindTaskForUserByIdUseCase findTaskForUserByIdUseCase;
 
-    @Autowired
-    private TaskService taskService;
+    @GetMapping(path = "/users/{userId}/tasks/{taskId}")
+    public ResponseEntity<?> getTaskForUserById(@PathVariable int userId, @PathVariable int taskId) {
 
-    /*@GetMapping(path = "/users/{userId}/tasks/{taskId}")
-    public ResponseEntity<?> getTaskForUserById(@PathVariable int userId, @PathVariable int taskId){
-        Optional<User> user = userService.getUserById(userId);
-        //Task task = taskService.getTaskById(user.get().getTasks(), taskId);
+        return new ResponseEntity<>(findTaskForUserByIdUseCase.getTaskById(userId, taskId), HttpStatus.OK);
 
-        return ResponseEntity.noContent().build();
-
-    }*/
+    }
 }

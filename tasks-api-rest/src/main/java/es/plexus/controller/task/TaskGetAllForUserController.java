@@ -1,32 +1,27 @@
 package es.plexus.controller.task;
 
 import es.plexus.entity.task.Task;
-import es.plexus.entity.user.User;
-import es.plexus.usecase.task.TaskService;
-import es.plexus.usecase.user.UpdateUserByIdUseCase;
+import es.plexus.usecase.task.FindAllTaskForUserUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/app-task")
+@RequestMapping("/app-task/1")
 public class TaskGetAllForUserController {
-
     @Autowired
-    private UpdateUserByIdUseCase userService;
+    private FindAllTaskForUserUseCase findAllTaskForUserUseCase;
 
-    @Autowired
-    private TaskService taskService;
+    @GetMapping(path = "/users/{userId}/tasks")
+    public ResponseEntity<List<Task>> getTasksForUser(@PathVariable int userId) {
 
-    /*@GetMapping(path = "/users/{id}/tasks")
-    public List<Task> getTasksForUser(@PathVariable int id) {
-        Optional<User> user = userService.getUserById(id);
-        return taskService.getTasks(user.get());
+        return new ResponseEntity<>(findAllTaskForUserUseCase.getTasks(userId), HttpStatus.OK);
 
-    }*/
+    }
 }
